@@ -1,5 +1,10 @@
 # 飞牛相册桌面版（非官方）
 
+[![release](https://img.shields.io/github/v/release/Archettee/fnos-photos-desktop?style=flat-square&label=release)](https://github.com/Archettee/fnos-photos-desktop/releases)
+[![downloads](https://img.shields.io/github/downloads/Archettee/fnos-photos-desktop/total?style=flat-square&label=downloads)](https://github.com/Archettee/fnos-photos-desktop/releases)
+[![license](https://img.shields.io/github/license/Archettee/fnos-photos-desktop?style=flat-square)](LICENSE)
+[![platform](https://img.shields.io/badge/platform-Windows%2010%2F11%20x64-0078d6?style=flat-square)](#%E5%AE%89%E8%A3%85)
+
 把自建 [fnOS](https://www.fnnas.com/) 上的相册网页，封装成一个 Windows 桌面客户端。
 
 > ⚠️ 本项目是第三方社区作品，**与飞牛官方无关**，也不包含飞牛的源码或素材喵。
