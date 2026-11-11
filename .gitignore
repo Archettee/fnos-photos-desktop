@@ -1,0 +1,7 @@
+node_modules/
+dist/
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db
+build/icon-1024.png

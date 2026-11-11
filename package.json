@@ -1,0 +1,56 @@
+{
+  "name": "fnos-photos-desktop",
+  "version": "1.1.1",
+  "description": "非官方 fnOS 相册 Windows 桌面客户端：托盘常驻、自动登录、照片拖拽导出原图",
+  "main": "src/main.js",
+  "license": "MIT",
+  "private": false,
+  "author": "fnos-photos-desktop contributors",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win nsis",
+    "dist:portable": "electron-builder --win portable"
+  },
+  "devDependencies": {
+    "electron": "45.3.0",
+    "electron-builder": "^26.0.0"
+  },
+  "build": {
+    "appId": "io.github.fnos-photos.desktop",
+    "productName": "FnOS Photos",
+    "copyright": "非官方客户端，与飞牛官方无关",
+    "directories": {
+      "output": "dist",
+      "buildResources": "build"
+    },
+    "files": [
+      "src/**/*",
+      "build/icon.ico",
+      "package.json",
+      "!**/*.map"
+    ],
+    "compression": "maximum",
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": true,
+      "perMachine": false,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "飞牛相册",
+      "runAfterFinish": true,
+      "artifactName": "FnOS-Photos-Setup-${version}.exe",
+      "uninstallDisplayName": "飞牛相册（非官方）",
+      "deleteAppDataOnUninstall": false
+    }
+  }
+}

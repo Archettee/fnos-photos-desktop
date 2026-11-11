@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>设置 NAS 地址</title>
+<style>
+ :root{color-scheme:dark}
+ *{box-sizing:border-box}
+ body{margin:0;height:100vh;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(160deg,#2b3442,#1b2028);color:#e7ecf3;
+  font:13px/1.6 "Microsoft YaHei","PingFang SC",system-ui,sans-serif}
+ .card{width:460px;padding:28px 30px}
+ h1{margin:0 0 6px;font-size:17px;font-weight:600;letter-spacing:.3px}
+ p{margin:0 0 18px;color:#8e9aab;font-size:12px}
+ input{width:100%;height:40px;padding:0 12px;border-radius:9px;border:1px solid #39424f;
+  background:#141920;color:#e7ecf3;font-size:13px;outline:none}
+ input:focus{border-color:#4b8dff;box-shadow:0 0 0 3px rgba(75,141,255,.18)}
+ .hint{margin:8px 0 0;font-size:12px;color:#6f7c8d}
+ .err{margin:10px 0 0;font-size:12px;color:#ff7b72;min-height:18px}
+ .row{display:flex;gap:10px;justify-content:flex-end;margin-top:20px}
+ button{height:36px;padding:0 18px;border-radius:9px;border:0;font-size:13px;cursor:pointer}
+ .ghost{background:#252c36;color:#c7d0dc}
+ .ghost:hover{background:#2e3742}
+ .primary{background:#3b82f6;color:#fff}
+ .primary:hover{background:#2f74e0}
+</style>
+</head>
+<body>
+<div class="card">
+ <h1>连接你的飞牛 NAS</h1>
+ <p>填写 fnOS 的访问地址，例如 <code>http://192.168.1.10:5666</code>。仅保存在本机。</p>
+ <input id="url" spellcheck="false" autocomplete="off" placeholder="http://192.168.1.10:5666">
+ <div class="hint">可带端口与路径；不确定就在浏览器里看一下相册地址，把末尾的 <code>/p</code> 去掉。</div>
+ <div class="err" id="err"></div>
+ <div class="row">
+  <button class="ghost" id="cancel">取消</button>
+  <button class="primary" id="ok">保存并连接</button>
+ </div>
+</div>
+<script>
+ const input=document.getElementById('url'),err=document.getElementById('err');
+ (async()=>{
+  try{const {baseUrl}=await window.fnosSetup.get?window.fnosSetup.get():{};if(baseUrl)input.value=baseUrl;}catch{}
+ })();
+ input.focus();
+ const save=async()=>{
+  err.textContent='';
+  const v=input.value.trim();
+  if(!v){err.textContent='请输入地址';return;}
+  const r=await window.fnosSetup.save(v);
+  if(!r||!r.ok)err.textContent=(r&&r.error)||'保存失败';
+ };
+ document.getElementById('ok').addEventListener('click',save);
+ document.getElementById('cancel').addEventListener('click',()=>window.fnosSetup.cancel());
+ input.addEventListener('keydown',e=>{if(e.key==='Enter')save();});
+</script>
+</body>
+</html>
